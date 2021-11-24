@@ -54,9 +54,27 @@ public final class BoardController {
         // private Player whitePlayer, blackPlayer;
         private String currentPlayer;
 
+        private static final String[] HOME_RANK = { "rook", "knight", "bishop", "queen", "king", "bishop", "knight",
+                "rook" };
+
         // to create a fresh instance of Builder
         private Builder() {
             this.board = new Square[8][8];
+
+            for (int file = 0; file < 8; file++) {
+                Piece whitePeice = Piece.createPiece(0, file, "WHITE", HOME_RANK[file]);
+                this.board[0][file] = Square.createSquare(0, file, whitePeice);
+
+                Piece whitePawn = Piece.createPiece(1, file, "WHITE", "pawn");
+                this.board[1][file] = Square.createSquare(1, file, whitePawn);
+
+                Piece blackPeice = Piece.createPiece(7, file, "BLACK", HOME_RANK[7 - file]);
+                this.board[7][file] = Square.createSquare(7, file, blackPeice);
+
+                Piece blackPawn = Piece.createPiece(6, file, "BLACK", "pawn");
+                this.board[6][file] = Square.createSquare(6, file, blackPawn);
+            }
+
             // this.whitePlayer =
             // this.blackPlayer =
             this.currentPlayer = "WHITE";
